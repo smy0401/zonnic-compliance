@@ -110,6 +110,51 @@ The script will batch-process the test assets, compare the AI's output to the ha
 4. **Auditing (Data Engineering):** The JSON response is parsed, and the results (PASS/FAIL/WARNING, specific issues, timestamp) are committed to the SQLite database.
 5. **Delivery:** The structured data and annotated image are returned to the frontend for executive display.
 
+graph TD
+    %% Styling
+    classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef backend fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
+    classDef ai fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff;
+    classDef db fill:#451a03,stroke:#fbbf24,stroke-width:2px,color:#fff;
+    classDef mlops fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+
+    %% Nodes
+    subgraph Client ["🖥️ Presentation Layer (Next.js)"]
+        UI["React Web UI"]:::frontend
+    end
+
+    subgraph Server ["⚙️ Application Layer (FastAPI)"]
+        API_EVAL["POST /api/evaluate"]:::backend
+        API_BATCH["POST /api/evaluate/batch"]:::backend
+        API_HIST["GET /api/history"]:::backend
+        
+        CV["Computer Vision\n(OpenCV + EasyOCR)"]:::ai
+        LLM["AI Logic Engine\n(OpenAI GPT-4o)"]:::ai
+    end
+
+    subgraph Storage ["🗄️ Data Layer"]
+        SQL[(SQLite Database)]:::db
+    end
+
+    subgraph Testing ["🧪 MLOps Layer"]
+        EVAL["eval_harness.py\n(Automated Testing)"]:::mlops
+    end
+
+    %% Connections
+    UI -->|1. Upload Asset| API_EVAL
+    UI -->|1. Upload .ZIP| API_BATCH
+    UI -->|Fetch Audit Log| API_HIST
+    
+    API_EVAL -->|2. Image Bytes| CV
+    API_BATCH -->|Async Tasks| CV
+    
+    CV -->|3. Bounding Box Image| LLM
+    LLM -->|4. Strict JSON Output| SQL
+    
+    API_HIST -->|Query History| SQL
+    
+    EVAL -.->|Regression Test Images| API_EVAL
+
 ---
 *Developed as an architectural demonstration of integrating Generative AI into enterprise compliance workflows.*
 ```
