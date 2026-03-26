@@ -103,16 +103,14 @@ The script will batch-process the test assets, compare the AI's output to the ha
 ---
 
 ## 🏗️ Architecture & Logic Flow
-```mermaid
+<pre><code>```mermaid
 graph TD
-    %% Styling
     classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
     classDef backend fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
     classDef ai fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff;
     classDef db fill:#451a03,stroke:#fbbf24,stroke-width:2px,color:#fff;
     classDef mlops fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
 
-    %% Nodes
     subgraph Client ["🖥️ Presentation Layer (Next.js)"]
         UI["React Web UI"]:::frontend
     end
@@ -122,19 +120,18 @@ graph TD
         API_BATCH["POST /api/evaluate/batch"]:::backend
         API_HIST["GET /api/history"]:::backend
         
-        CV["Computer Vision\n(OpenCV + EasyOCR)"]:::ai
-        LLM["AI Logic Engine\n(OpenAI GPT-4o)"]:::ai
+        CV["Computer Vision (OpenCV + EasyOCR)"]:::ai
+        LLM["AI Logic Engine (OpenAI GPT-4o)"]:::ai
     end
 
     subgraph Storage ["🗄️ Data Layer"]
-        SQL[(SQLite Database)]:::db
+        SQL[("SQLite Database")]:::db
     end
 
     subgraph Testing ["🧪 MLOps Layer"]
-        EVAL["eval_harness.py\n(Automated Testing)"]:::mlops
+        EVAL["eval_harness.py (Automated Testing)"]:::mlops
     end
 
-    %% Connections
     UI -->|1. Upload Asset| API_EVAL
     UI -->|1. Upload .ZIP| API_BATCH
     UI -->|Fetch Audit Log| API_HIST
@@ -147,7 +144,11 @@ graph TD
     
     API_HIST -->|Query History| SQL
     
-    EVAL -.->|Regression Test Images| API_EVAL ```
+    EVAL -.->|Regression Test Images| API_EVAL
+```</code></pre>
+
+
+
 
 1. **Ingestion:** User uploads a `.jpg`, `.png`, `.webp`, or a `.zip` batch via the Next.js UI.
 2. **Pre-Processing (CV):** The image is converted to a NumPy array. EasyOCR scans for the brand name. If found, OpenCV draws a 2px green bounding box to guide the LLM's attention.
