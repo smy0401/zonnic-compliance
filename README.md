@@ -110,6 +110,9 @@ The script will batch-process the test assets, compare the AI's output to the ha
 4. **Auditing (Data Engineering):** The JSON response is parsed, and the results (PASS/FAIL/WARNING, specific issues, timestamp) are committed to the SQLite database.
 5. **Delivery:** The structured data and annotated image are returned to the frontend for executive display.
 
+---
+*Developed as an architectural demonstration of integrating Generative AI into enterprise compliance workflows.*
+```
 graph TD
     %% Styling
     classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
@@ -154,7 +157,3 @@ graph TD
     API_HIST -->|Query History| SQL
     
     EVAL -.->|Regression Test Images| API_EVAL
-
----
-*Developed as an architectural demonstration of integrating Generative AI into enterprise compliance workflows.*
-```
