@@ -1,0 +1,26 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Node.js / Frontend
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# Python / Backend
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment Variables (CRITICAL)
+.env
+.env.local
+.env.*
+
+# Databases
+*.db
+*.sqlite3
+zonnic_audit_history.db
