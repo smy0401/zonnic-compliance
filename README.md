@@ -103,7 +103,9 @@ The script will batch-process the test assets, compare the AI's output to the ha
 ---
 
 ## 🏗️ Architecture & Logic Flow
-<pre><code>```mermaid
+
+
+```mermaid
 graph TD
     classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
     classDef backend fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
@@ -145,8 +147,7 @@ graph TD
     API_HIST -->|Query History| SQL
     
     EVAL -.->|Regression Test Images| API_EVAL
-```</code></pre>
-
+```
 
 
 
