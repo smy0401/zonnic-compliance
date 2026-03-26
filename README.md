@@ -103,6 +103,7 @@ The script will batch-process the test assets, compare the AI's output to the ha
 ---
 
 ## 🏗️ Architecture & Logic Flow
+```mermaid
 graph TD
     %% Styling
     classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
@@ -146,7 +147,7 @@ graph TD
     
     API_HIST -->|Query History| SQL
     
-    EVAL -.->|Regression Test Images| API_EVAL
+    EVAL -.->|Regression Test Images| API_EVAL ```
 
 1. **Ingestion:** User uploads a `.jpg`, `.png`, `.webp`, or a `.zip` batch via the Next.js UI.
 2. **Pre-Processing (CV):** The image is converted to a NumPy array. EasyOCR scans for the brand name. If found, OpenCV draws a 2px green bounding box to guide the LLM's attention.
