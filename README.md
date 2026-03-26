@@ -103,16 +103,6 @@ The script will batch-process the test assets, compare the AI's output to the ha
 ---
 
 ## 🏗️ Architecture & Logic Flow
-
-1. **Ingestion:** User uploads a `.jpg`, `.png`, `.webp`, or a `.zip` batch via the Next.js UI.
-2. **Pre-Processing (CV):** The image is converted to a NumPy array. EasyOCR scans for the brand name. If found, OpenCV draws a 2px green bounding box to guide the LLM's attention.
-3. **Reasoning (AI):** The annotated image is encoded to Base64 and sent to GPT-4o alongside a JSON-enforced Chain-of-Thought prompt containing the extracted brand master guidelines.
-4. **Auditing (Data Engineering):** The JSON response is parsed, and the results (PASS/FAIL/WARNING, specific issues, timestamp) are committed to the SQLite database.
-5. **Delivery:** The structured data and annotated image are returned to the frontend for executive display.
-
----
-*Developed as an architectural demonstration of integrating Generative AI into enterprise compliance workflows.*
-```
 graph TD
     %% Styling
     classDef frontend fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
@@ -157,3 +147,14 @@ graph TD
     API_HIST -->|Query History| SQL
     
     EVAL -.->|Regression Test Images| API_EVAL
+
+1. **Ingestion:** User uploads a `.jpg`, `.png`, `.webp`, or a `.zip` batch via the Next.js UI.
+2. **Pre-Processing (CV):** The image is converted to a NumPy array. EasyOCR scans for the brand name. If found, OpenCV draws a 2px green bounding box to guide the LLM's attention.
+3. **Reasoning (AI):** The annotated image is encoded to Base64 and sent to GPT-4o alongside a JSON-enforced Chain-of-Thought prompt containing the extracted brand master guidelines.
+4. **Auditing (Data Engineering):** The JSON response is parsed, and the results (PASS/FAIL/WARNING, specific issues, timestamp) are committed to the SQLite database.
+5. **Delivery:** The structured data and annotated image are returned to the frontend for executive display.
+
+---
+*Developed as an architectural demonstration of integrating Generative AI into enterprise compliance workflows.*
+```
+
