@@ -1,50 +1,48 @@
 ***
 
 ```markdown
-# 🚀 ZONNIC AI Compliance Engine
-
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-teal)
+# ZONNIC AI Compliance Engine
 
 An enterprise-grade, full-stack AI pipeline designed to automate marketing asset compliance. This engine uses a combination of traditional Computer Vision and advanced Large Language Models (LLMs) to verify brand guidelines, enforce safety zones, and log telemetry for marketing audits.
 
-## ✨ Key Features
+##  Key Features
 
-* **🤖 Zero-Shot Visual Reasoning:** Utilizes OpenAI's GPT-4o with strict "Structured Chain-of-Thought" (CoT) prompting to evaluate complex, subjective design rules without hallucination.
-* **👁️ Computer Vision Pre-processing:** Integrates `EasyOCR` and `OpenCV` to detect, localize, and draw bounding boxes around brand logos *before* LLM evaluation, increasing AI accuracy.
-* **⚡ Asynchronous Batch Processing:** Leverages `asyncio` and in-memory zip extraction to evaluate batches of images concurrently, drastically reducing processing latency.
-* **🗄️ Immutable Audit Logging:** Persists all AI decisions, rule violations, and timestamps to a local SQLite database for compliance tracking and stakeholder reporting (Includes CSV Export).
-* **🧪 MLOps Evaluation Harness:** Features a standalone Continuous Integration (CI) testing script (`eval_harness.py`) to prevent "prompt drift" by measuring system accuracy against a ground-truth dataset.
-* **💎 Premium Executive UI:** A modern, glassmorphism-styled Next.js frontend featuring drag-and-drop uploads, dynamic routing, and interactive data tables.
+*  Zero-Shot Visual Reasoning: Utilizes OpenAI's GPT-4o with strict "Structured Chain-of-Thought" (CoT) prompting to evaluate complex, subjective design rules without hallucination.
+*  Computer Vision Pre-processing: Integrates `EasyOCR` and `OpenCV` to detect, localize, and draw bounding boxes around brand logos *before* LLM evaluation, increasing AI accuracy.
+*  Asynchronous Batch Processing: Leverages `asyncio` and in-memory zip extraction to evaluate batches of images concurrently, drastically reducing processing latency.
+*  Immutable Audit Logging: Persists all AI decisions, rule violations, and timestamps to a local SQLite database for compliance tracking and stakeholder reporting (Includes CSV Export).
+*  MLOps Evaluation Harness: Features a standalone Continuous Integration (CI) testing script (`eval_harness.py`) to prevent "prompt drift" by measuring system accuracy against a ground-truth dataset.
+*  Premium Executive UI: A modern, glassmorphism-styled Next.js frontend featuring drag-and-drop uploads, dynamic routing, and interactive data tables.
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
-**Frontend:**
+Frontend:
 * React / Next.js (App Router)
 * Tailwind CSS
 * Lucide React (Icons)
 
-**Backend:**
+Backend:
 * Python / FastAPI
 * AsyncIO / Uvicorn
 * SQLite3 (Telemetry persistence)
 
-**AI & Machine Learning:**
+AI & Machine Learning:
 * OpenAI API (GPT-4o Vision)
 * EasyOCR (Optical Character Recognition)
 * OpenCV & NumPy (Image processing)
 
+```
 ---
 
-## 🚀 Getting Started (Local Development)
+
+##  Getting Started (Local Development)
 
 ### 1. Clone the Repository
 ```bash
 git clone [https://github.com/YOUR_USERNAME/zonnic-compliance.git](https://github.com/YOUR_USERNAME/zonnic-compliance.git)
 cd zonnic-compliance
 ```
+
 
 ### 2. Backend Setup (FastAPI)
 Navigate to the root directory where `main.py` is located. Create a virtual environment and install the dependencies.
@@ -86,7 +84,7 @@ npm run dev
 
 ---
 
-## 🧪 Running the MLOps Evaluation Harness
+##  Running the MLOps Evaluation Harness
 
 To ensure the AI's logic remains accurate after prompt updates, you can run the automated regression testing suite.
 
@@ -102,7 +100,7 @@ The script will batch-process the test assets, compare the AI's output to the ha
 
 ---
 
-## 🏗️ Architecture & Logic Flow
+##  Architecture & Logic Flow
 
 
 ```mermaid
@@ -113,11 +111,11 @@ graph TD
     classDef db fill:#451a03,stroke:#fbbf24,stroke-width:2px,color:#fff;
     classDef mlops fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
 
-    subgraph Client ["🖥️ Presentation Layer (Next.js)"]
+    subgraph Client [" Presentation Layer (Next.js)"]
         UI["React Web UI"]:::frontend
     end
 
-    subgraph Server ["⚙️ Application Layer (FastAPI)"]
+    subgraph Server [" Application Layer (FastAPI)"]
         API_EVAL["POST /api/evaluate"]:::backend
         API_BATCH["POST /api/evaluate/batch"]:::backend
         API_HIST["GET /api/history"]:::backend
@@ -126,11 +124,11 @@ graph TD
         LLM["AI Logic Engine (OpenAI GPT-4o)"]:::ai
     end
 
-    subgraph Storage ["🗄️ Data Layer"]
+    subgraph Storage [" Data Layer"]
         SQL[("SQLite Database")]:::db
     end
 
-    subgraph Testing ["🧪 MLOps Layer"]
+    subgraph Testing [" MLOps Layer"]
         EVAL["eval_harness.py (Automated Testing)"]:::mlops
     end
 
